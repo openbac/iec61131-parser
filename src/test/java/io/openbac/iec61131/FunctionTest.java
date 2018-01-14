@@ -29,7 +29,7 @@ public class FunctionTest extends GrammarTest {
 		
 		String test ="FUNCTION SIMPLE_FUN : REAL "+
 				"VAR_INPUT\n" + 
-				"A,B : REAL ; 		(* Festlegung der externen Schnittstelle *) " +
+				"A : REAL ; 		(* Festlegung der externen Schnittstelle *) " +
 				"C   : REAL := 1.0;					\n" + 
 				"END_VAR								\n" + 
 				"VAR_IN_OUT" +
