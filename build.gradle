@@ -1,0 +1,26 @@
+
+apply plugin: 'java-library'
+apply plugin: 'antlr'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    
+    // https://mvnrepository.com/artifact/org.antlr/antlr4
+    compile group: 'org.antlr', name: 'antlr4', version: '4.7.1'
+
+    antlr group: 'org.antlr', name: 'antlr4', version: '4.7.1'
+    
+}
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ["-visitor", "-listener", "-long-messages","-package","io.openbac.iec61131"]
+
+
+}
