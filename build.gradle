@@ -1,10 +1,20 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
 
 apply plugin: 'java-library'
 apply plugin: 'antlr'
+apply plugin: 'maven-publish'
+
+
 
 repositories {
     jcenter()
 }
+
+group = 'io.openbac'
+version = '1.0'
+
 
 dependencies {
 
@@ -12,7 +22,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     
     // https://mvnrepository.com/artifact/org.antlr/antlr4
-    compile group: 'org.antlr', name: 'antlr4', version: '4.7.1'
+    implementation group: 'org.antlr', name: 'antlr4', version: '4.7.1'
 
     antlr group: 'org.antlr', name: 'antlr4', version: '4.7.1'
     
@@ -24,3 +34,30 @@ generateGrammarSource {
 
 
 }
+
+bintray {	
+	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+	publications = ['mavenJava']
+	pkg {
+		repo = 'io.openbac'
+		name = 'iec61131-parser'
+		userOrg = 'openbac'
+		licenses = ['AGPL-V3']
+		vcsUrl = 'https://github.com/openbach/iec61131-parser.git'
+		
+	}
+
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
